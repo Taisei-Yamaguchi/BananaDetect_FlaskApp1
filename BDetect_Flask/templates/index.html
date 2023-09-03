@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Banana Detect</title>
+</head>
+<body>
+    <h1>Banana Detect</h1>
+    <form method="POST" action="/" enctype="multipart/form-data">
+        <input type="file" name="image">
+        <input type="submit" value="Upload">
+    </form>
+
+    <div class="result-image">
+        {% if image_path %}
+            <h2>Uploaded Image</h2>
+            <img src="../{{image_path}}" alt="image" width="80%">
+        {% endif %}
+    </div>
+</body>
+</html>
