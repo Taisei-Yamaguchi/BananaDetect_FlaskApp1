@@ -2,19 +2,42 @@
 <html>
 <head>
     <title>Banana Detect</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/banana_index.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Banana Detect</h1>
-    <form method="POST" action="/" enctype="multipart/form-data">
-        <input type="file" name="image">
-        <input type="submit" value="Upload">
-    </form>
+    <!-- <main class="main-container">
+        <h1>Banana Detect</h1>
+        <form action='/' method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" id="file-input">
+            <input type="submit" id="upload-button" value="UPLOAD">
+        </form>
 
-    <div class="result-image">
-        {% if image_path %}
-            <h2>Uploaded Image</h2>
-            <img src="../{{image_path}}" alt="image" width="80%">
-        {% endif %}
-    </div>
+        <div class="result-image">
+            {% if image_path %}
+                <h2>Detect Image</h2>
+                <img src="../{{image_path}}" alt="image" width="80%">
+            {% endif %}
+        </div>
+    </main> -->
+
+    <main class="main-container">
+        <h1>Banana Detect</h1>
+        <form action='/upload' method="POST" enctype="multipart/form-data" id="upload-form">
+            <input type="file" name="image" id="file-input">
+            <input type="submit" id="upload-button" value="UPLOAD">
+        </form>
+
+        <div class="result-image">
+            
+        </div>
+    </main>
+
+
+    
+    <script src="../static/js/index.js"></script>
 </body>
 </html>

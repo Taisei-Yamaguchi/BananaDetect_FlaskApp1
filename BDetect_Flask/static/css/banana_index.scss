@@ -1,0 +1,18 @@
+$banana:rgb(211, 208, 119);
+
+body{
+    background-color: $banana;
+    color: rgb(56, 45, 45);
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .result-image{
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+    }
+}
