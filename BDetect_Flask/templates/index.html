@@ -9,35 +9,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <!-- <main class="main-container">
-        <h1>Banana Detect</h1>
-        <form action='/' method="POST" enctype="multipart/form-data">
-            <input type="file" name="image" id="file-input">
-            <input type="submit" id="upload-button" value="UPLOAD">
-        </form>
-
-        <div class="result-image">
-            {% if image_path %}
-                <h2>Detect Image</h2>
-                <img src="../{{image_path}}" alt="image" width="80%">
-            {% endif %}
-        </div>
-    </main> -->
-
     <main class="main-container">
-        <h1>Banana Detect</h1>
+        <h1>Banana Brix Predict</h1>
         <form action='/upload' method="POST" enctype="multipart/form-data" id="upload-form">
             <input type="file" name="image" id="file-input">
             <input type="submit" id="upload-button" value="UPLOAD">
         </form>
 
-        <div class="result-image">
-            
-        </div>
+        <div class="result-image"></div>
+        <div class="predict-brix"></div>
     </main>
-
-
-    
     <script src="../static/js/index.js"></script>
 </body>
 </html>

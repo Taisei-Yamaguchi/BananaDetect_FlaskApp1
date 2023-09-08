@@ -1,4 +1,4 @@
-$banana:rgb(211, 208, 119);
+$banana:rgb(225, 218, 16);
 
 body{
     background-color: $banana;
@@ -14,5 +14,33 @@ main{
         display: flex;
         flex-direction: column;
         align-items:center;
+    }
+
+    .predict-brix{
+        width:50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .loading-box{
+            background-color: rgb(197, 184, 184);
+            width:80%;
+            height:30px;
+
+            .loading-brick{
+                background-color: rgb(0, 162, 11);
+                height:30px;
+                
+                width: 0; /* 初期状態は0% */
+                animation: fillWidth 8s linear forwards; /* アニメーションを適用、3秒間かけて100%に */
+            }
+            @keyframes fillWidth {
+                0% {
+                    width: 0; /* 開始時の幅（0%） */
+                }
+                100% {
+                    width: 100%; /* 終了時の幅（100%） */
+                }
+            }  
+        }
     }
 }
