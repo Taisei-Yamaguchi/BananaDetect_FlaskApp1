@@ -17,7 +17,7 @@ $(document).ready(function () {
 
                 // レスポンスからdata取得
                 var imageUrl =response.image_path; // レスポンスは画像のURLを含んでいると仮定
-                var predictBrix=response.predict_brix;
+                var predict=response.predict;
 
                 // ランダムなクエリ文字列を生成
                 var randomQueryString = Math.random().toString(36).substring(7);
@@ -25,12 +25,14 @@ $(document).ready(function () {
                 var absoluteImageUrl = window.location.origin + imageUrl + '?' + randomQueryString;
 
                 var predictMes='';
-                if(predictBrix>20){
-                    predictMes='ちょー甘い';
-                }else if(predictBrix>10){
-                    predictMes='ほんのり甘い';
-                }else{
-                    predictMes='食べどきではない';
+                if(predict=0){
+                    predictMes='未熟';
+                }else if(predict=1){
+                    predictMes='甘い,食べごろ';
+                }else if(predict=2){
+                    predictMes='甘いけど腐りつつあるから注意';
+                }else if(predict=3){
+                    predictMes='腐ってる。食べない方がいいかも';
                 }
 
                 // 指定した要素に新しいHTMLコンテンツを追加
@@ -45,7 +47,7 @@ $(document).ready(function () {
                 // 9秒後に predictBrix の表示を追加
                 setTimeout(function () {
                     $('.predict-brix').empty().append(`
-                    <p><strong>予測糖度: ${predictBrix}</strong></p>
+                    <p><strong>予測糖度: ${predict}</strong></p>
                     <p><strong>評価: ${predictMes}</strong></p>
                     `);
                 }, 9000);
