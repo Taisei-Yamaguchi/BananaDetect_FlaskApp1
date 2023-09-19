@@ -16,7 +16,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = os.path.abspath('static/uploads')  
 # モデルの読み込み
 model_d= joblib.load('bananaDetect3.pkl')
-model_c=joblib.load('bananaClassify3.pkl')
+model_c=joblib.load('bananaClassify4.pkl')
 # uploads フォルダの絶対パスを設定
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # モデルのデバイスを設定
@@ -193,7 +193,7 @@ def upload_image():
 
             
             # ここでtemplate_imageとして保存する？
-            temp_image_path = os.path.join(UPLOAD_FOLDER, 'temp_image.jpg')
+            temp_image_path = os.path.join(UPLOAD_FOLDER, 'temp_image.JPG')
             pil_image.save(temp_image_path)
 
 
@@ -221,7 +221,7 @@ def upload_image():
                     
 
             # 画像を開く
-            image_path1 = os.path.join(UPLOAD_FOLDER, 'temp_image.jpg')
+            image_path1 = os.path.join(UPLOAD_FOLDER, 'temp_image.JPG')
             pil_image1 = Image.open(image_path1)
             # バウンディングボックスを検出
             image_tensor1 = preprocess_image(pil_image1)

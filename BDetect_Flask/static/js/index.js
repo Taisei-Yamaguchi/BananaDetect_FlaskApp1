@@ -23,13 +23,13 @@ $(document).ready(function () {
                 var randomQueryString = Math.random().toString(36).substring(7);
                 // 絶対パスを生成して画像を表示　クエリ文字を設定し直すことでキャッシュを無効化できる。
                 var absoluteImageUrl = window.location.origin + imageUrl + '?' + randomQueryString;
-
+                // modelの結果が全て1nいなる原因は下の===を=にしていたから！！！
                 var predictMes='';
-                if(predict=0){
+                if(predict===0){
                     predictMes='食べられるけどもう少し持ってもいいかも';
-                }else if(predict=1){
+                }else if(predict===1){
                     predictMes='十分食べごろですね';
-                }else if(predict=2){
+                }else if(predict===2){
                     predictMes='腐りつつあるから注意';
                 }
 
