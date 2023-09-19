@@ -26,13 +26,11 @@ $(document).ready(function () {
 
                 var predictMes='';
                 if(predict=0){
-                    predictMes='未熟';
+                    predictMes='食べられるけどもう少し持ってもいいかも';
                 }else if(predict=1){
-                    predictMes='甘い,食べごろ';
+                    predictMes='十分食べごろですね';
                 }else if(predict=2){
-                    predictMes='甘いけど腐りつつあるから注意';
-                }else if(predict=3){
-                    predictMes='腐ってる。食べない方がいいかも';
+                    predictMes='腐りつつあるから注意';
                 }
 
                 // 指定した要素に新しいHTMLコンテンツを追加
@@ -47,7 +45,7 @@ $(document).ready(function () {
                 // 9秒後に predictBrix の表示を追加
                 setTimeout(function () {
                     $('.predict-brix').empty().append(`
-                    <p><strong>予測糖度: ${predict}</strong></p>
+                    <p><strong>予測レベル: ${predict}</strong></p>
                     <p><strong>評価: ${predictMes}</strong></p>
                     `);
                 }, 9000);
