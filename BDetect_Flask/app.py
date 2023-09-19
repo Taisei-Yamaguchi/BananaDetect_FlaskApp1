@@ -16,7 +16,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = os.path.abspath('static/uploads')  
 # モデルの読み込み
 model_d= joblib.load('bananaDetect3.pkl')
-model_c=joblib.load('bananaClassify2.pkl')
+model_c=joblib.load('bananaClassify3.pkl')
 # uploads フォルダの絶対パスを設定
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # モデルのデバイスを設定
@@ -81,8 +81,8 @@ def draw_boxes(image, predictions, threshold=0.5,outline_color="red", outline_wi
 def preprocess_cropped_image(image):
     transform = T.Compose([
         T.Resize((224, 224)),  # 画像を指定のサイズにリサイズ
-        # T.RandomHorizontalFlip(),  # ランダムな水平反転
-        # T.RandomRotation(10),  # ランダムな回転（最大10度）
+        T.RandomHorizontalFlip(),  # ランダムな水平反転
+        T.RandomRotation(10),  # ランダムな回転（最大10度）
 #         T.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.2),  # 色情報を変更
         T.ToTensor(),  # 画像をテンソルに変換
         T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),  # 画像を標準化
