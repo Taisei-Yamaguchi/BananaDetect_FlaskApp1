@@ -12,37 +12,38 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (response) {
-                console.log('画像のアップロードが成功しました');
-                console.log('レスポンス:', response);
+                console.log('Success upload image');
+                console.log('Response:', response);
 
-                // レスポンスからdata取得
-                var imageUrl =response.image_path; // レスポンスは画像のURLを含んでいると仮定
-                var predict=response.predict;
+                // get data from response
+                var imageUrl =response.image_path; // image_path
+                var predict=response.predict; //predict status
 
-                // ランダムなクエリ文字列を生成
+                // generate random query
                 var randomQueryString = Math.random().toString(36).substring(7);
-                // 絶対パスを生成して画像を表示　クエリ文字を設定し直すことでキャッシュを無効化できる。
+                // 絶対パスを生成して画像を表示　クエリ文字を設定し直すことでキャッシュを無効化できる!
                 var absoluteImageUrl = window.location.origin + imageUrl + '?' + randomQueryString;
-                // modelの結果が全て1nいなる原因は下の===を=にしていたから！！！
+                // modelの結果が全て1になる原因は下の===を=にしていたから！！！
                 var predictMes='';
                 if(predict===0){
-                    predictMes='食べられるけどもう少し持ってもいいかも';
+                    predictMes='It\'s edible. But it\'s good to wait a little..';
                 }else if(predict===1){
-                    predictMes='十分食べごろですね';
+                    predictMes='It should be sweet. Le\'s eat!';
                 }else if(predict===2){
-                    predictMes='腐りつつあるから注意';
+                    predictMes='Be careful. It\'s perioshble!';
                 }
 
-                // 指定した要素に新しいHTMLコンテンツを追加
+                // add new Element
+                //image of Dtect Result
                 $('.result-image').empty().append(`
                 <h2>Detect Image</h2>
                 <img src=${absoluteImageUrl} alt="Detect Image" width='70%'>
                 `);
 
-                // 表示中の砂時計のアニメーションを追加
-                $('.predict-brix').html('<strong>予測中...</strong><div class="loading-box"><div class="loading-brick"></div></div>');
+                // 表add animation
+                $('.predict-brix').html('<strong>Predicting...</strong><div class="loading-box"><div class="loading-brick"></div></div>');
 
-                // 9秒後に predictBrix の表示を追加
+                // add Predict Result after 9 seconds.
                 setTimeout(function () {
                     $('.predict-brix').empty().append(`
                     <p><strong>予測レベル: ${predict}</strong></p>
@@ -52,9 +53,9 @@ $(document).ready(function () {
 
             },
             error: function (xhr, status, error) {
-                console.error('画像のアップロード中にエラーが発生しました');
-                console.error('ステータスコード:', status);
-                console.error('エラーメッセージ:', error);
+                console.error('some errors occured during uploading image.');
+                console.error('StatusCode:', status);
+                console.error('Error:', error);
             },
         });
     });
