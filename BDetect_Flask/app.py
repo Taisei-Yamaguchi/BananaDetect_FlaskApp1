@@ -35,12 +35,6 @@ def draw_boxes(image, best_box,outline_color="red", outline_width=3, outer_color
     if best_box is not None:
         best_box = [round(i, 2) for i in best_box.tolist()]  # interept bounding box into Integer.
         draw.rectangle(best_box, outline="red", width=3)
-
-        # crop bounding image
-        left, top, right, bottom = map(int, best_box)
-        cropped_image = image.crop((left, top, right, bottom))
-
-        cropped_image.save('static/uploads/cropped_result.jpg')  # save crop image
     return image
 
 
@@ -61,7 +55,6 @@ def detect_bounding_box(model, image_tensor, threshold=0.5):
     with torch.no_grad():
         image_tensor = image_tensor.to(device)
         predictions = model(image_tensor)
-
     # find high score bounding box. and return only one.
     best_score = 0.0
     best_box = None
@@ -69,7 +62,6 @@ def detect_bounding_box(model, image_tensor, threshold=0.5):
         if score > threshold and score > best_score:
             best_score = score
             best_box = box
-
     return best_box
 
 
@@ -84,6 +76,8 @@ def preprocess_cropped_image(image):
         T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),  
     ])
     return transform(image).unsqueeze(0) 
+
+
 
 # 5. predict banana status judge.
 def classify_banana(model, image):    
@@ -119,7 +113,7 @@ def upload_image():
             temp_image_path = os.path.join(UPLOAD_FOLDER, 'temp_image.JPG')
             pil_image.save(temp_image_path)
 
-
+            # create bounding images
             image_tensor = preprocess_image(pil_image)
             # input image into model and get bounding box.
             best_box = detect_bounding_box(model_d, image_tensor)
@@ -128,23 +122,13 @@ def upload_image():
             # save image as result.jpg
             result_image_path = os.path.join(UPLOAD_FOLDER,'result.jpg')
             result_image.save(result_image_path)
-
-
-            # open temp_image.jpg
-            image_path1 = os.path.join(UPLOAD_FOLDER, 'temp_image.JPG')
-            pil_image1 = Image.open(image_path1)
-            # detect bounding box.
-            image_tensor1 = preprocess_image(pil_image1)
-            bounding_box1 = detect_bounding_box(model_d, image_tensor1)
         
-            if bounding_box1 is not None:
-                
-                x1, y1, x2, y2 = map(int, bounding_box1.tolist())
+            # next , with best_box and crop images and predict banana status.
+            if best_box is not None:
+                x1, y1, x2, y2 = map(int, best_box.tolist())
                 cropped_image = pil_image.crop((x1, y1, x2, y2))
-                        
                 # apply preprocessing
                 cropped_image_tensor = preprocess_cropped_image(cropped_image)
-                        
                 # predict status
                 predicted_class = classify_banana(model_c, cropped_image_tensor)
                         

@@ -28,9 +28,9 @@ $(document).ready(function () {
                 if(predict===0){
                     predictMes='It\'s edible. But it\'s good to wait a little..';
                 }else if(predict===1){
-                    predictMes='It should be sweet. Le\'s eat!';
+                    predictMes='It should be sweet. Let\'s eat!';
                 }else if(predict===2){
-                    predictMes='Be careful. It\'s perioshble!';
+                    predictMes='Be careful. It\'s perishable!';
                 }
 
                 // add new Element
@@ -46,7 +46,6 @@ $(document).ready(function () {
                 // add Predict Result after 9 seconds.
                 setTimeout(function () {
                     $('.predict-brix').empty().append(`
-                    <p><strong>予測レベル: ${predict}</strong></p>
                     <p><strong>評価: ${predictMes}</strong></p>
                     `);
                 }, 9000);
